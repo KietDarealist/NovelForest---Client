@@ -1,11 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Home from './pages/Home';
 
 function App() {
   return (
     <div className="App">
-        <h3 className="text-red-500">Hello World</h3>
+      <Home />
     </div>
   );
 }
