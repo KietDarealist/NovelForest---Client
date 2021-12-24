@@ -74,6 +74,10 @@ const Home:React.FC<IProps> = (props) => {
             <Header />
             <Stories title="Truyện nổi bật trong tuần" data={Novels} />
             <Stories title="Truyện mới cập nhật" data={Novels} />
+            <Stories title="Truyện nhiều lượt xem" data={Novels} />
+            <Stories title="Truyện được yêu thích" data={Novels} />
+            <Stories title="Truyện dài" data={Novels} />
+            <Stories title="Truyện ngắn" data={Novels} />
 
             <Footer />
         </>

@@ -1,14 +1,30 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import { Link } from "react-router-dom";
 import {SearchIcon, MenuIcon} from "@heroicons/react/outline"
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators, IniState } from "../../states";
 
 interface IProps{
 
 }
 
 const Header:React.FC<IProps> = (props):JSX.Element => {
+    const newUser:IUser =  {};
     const [open, setOpen] = useState(false);
+    const [verify, setVerify] = useState(false);
+    const dispatch = useDispatch();
+    const {registerUser, loadUser} = bindActionCreators(actionCreators, dispatch);
+    const auth = useSelector((state:IniState) => state.user);
+
     
+    const tempUser:IUser = {
+        name: "Tuan Kiet",
+        account: "20110508@student.hcmute.edu.vn",
+        password: "tuankiet@123",
+    }
+
+
     return (
         //background
         <div className="items-center h-4 bg-green xl:h-9 lg:h-7 md:h-6">
@@ -23,37 +39,35 @@ const Header:React.FC<IProps> = (props):JSX.Element => {
                             <h3 className="italic font-bold text-dark-green xl:text-3xl ">Forest</h3>
                         </div>
                    </Link>
-
                    {/*left-menu*/}
                    <div className="flex items-center justify-between w-full xl:mt-1">
                        <Link to="/the-loai"><h4 className="font-semibold text-white cursor-pointer xl:text-xl hover:text-dark-green">Thể loại</h4></Link>
                        <Link to=""><h4 className="font-semibold text-white cursor-pointer xl:text-xl hover:text-dark-green">Sáng tác</h4></Link>
                        <Link to=""><h4 className="font-semibold text-white cursor-pointer xl:text-xl hover:text-dark-green">Thư viện</h4></Link>
                    </div>
-
                 </div>
-
                 {/*mobile-left-container*/}
                 <div className="flex w-1/2 md:hidden">
                     <SearchIcon className="h-2 font-semibold" />
                 </div>
-
-
-
                 {/*right-container*/}
                 <div className="items-center justify-between hidden float-right lg:w-1/2 md:w-1/3 md:flex">
                     <div className="justify-between py-0.5 px-1 bg-white lg:flex md:hidden xl:w-1/2 rounded-2xl">
                         <input placeholder="Tìm kiếm" className="w-full outline-none"/>
                         <SearchIcon className="cursor-pointer xl:h-2 xl:flex lg:flex lg:h-2"/>
                     </div>
-                    <button className="xl:px-2 xl:py-0.5 md:px-1 md:py-0.1 font-semibold rounded-2xl bg-light-grey text-dark-green xl:text-md hover:text-white hover:bg-dark-green">
-                            Đăng nhập
+                    <button 
+                    className="xl:px-2 xl:py-0.5 md:px-1 md:py-0.1 font-semibold rounded-2xl bg-light-grey text-dark-green xl:text-md hover:text-white hover:bg-dark-green"
+                   
+                    >
+                           {`${auth.user ? auth.user.name as string : "No"}`}
                     </button>
-                    <button className="xl:px-3 xl:py-0.5 md:px-1.5 md:py-0.1 font-semibold rounded-2xl bg-dark-green text-white xl:text-md hover:text-dark-green hover:bg-light-grey">
+                    <button className="xl:px-3 xl:py-0.5 md:px-1.5 md:py-0.1 font-semibold rounded-2xl bg-dark-green text-white xl:text-md hover:text-dark-green hover:bg-light-grey"
+                        onClick={() => {registerUser(tempUser); loadUser()}}
+                    >
                             Đăng ký
                     </button>
                 </div>
-
                 {/*right-mobile-container*/}
                 <div className="flex items-center justify-between w-2/3 md:hidden">
                     <div className="flex cursor-pointer">

@@ -1,5 +1,11 @@
-const greetings = ():void => {
-    console.log("Hello World");
-}
+import { combineReducers } from "redux";
+import userReducer from "../reducers/userReducer"
 
-export default greetings;
+
+const reducers = combineReducers({
+    user: userReducer
+})
+
+export default reducers;
+
+export type IniState = ReturnType<typeof reducers>
