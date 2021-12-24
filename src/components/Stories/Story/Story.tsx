@@ -1,9 +1,15 @@
 import React from 'react'
 
-export default function Story() {
+interface Iprops{
+
+}
+
+const Story:React.FC<Iprops> = (props):JSX.Element => {
     return (
         <div>
             
         </div>
     )
 }
+
+export default Story

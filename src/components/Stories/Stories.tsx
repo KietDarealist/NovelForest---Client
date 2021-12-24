@@ -1,6 +1,6 @@
 
 interface IProps { 
-  data : Stories[],
+  data : INovel[],
   title : string
 }
 
@@ -13,8 +13,8 @@ export  const Stories: React.FC<IProps>= (props) => {
             {
               props.data.map(item => (
                 <div>
-                  <img src={item.images} alt="lgoo"/>
-                  <h3 className="text-center">{item.title}</h3>
+                  <img src={item.thumbnail as string} alt="lgoo"/>
+                  <h3 className="text-center">{item.novelName}</h3>
                   <p className="text-center">{item.views}</p>
                 </div>
               ))
