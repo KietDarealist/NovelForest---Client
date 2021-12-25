@@ -1,17 +1,33 @@
 import './App.css';
-import Home from './pages/Home';
-import React from 'react';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useRoutes,
+} from "react-router-dom";
+import Home from"./pages/Home";
 
 interface IProps {
 
 }
 
-const App:React.FC<IProps> = (props):JSX.Element =>  {
-  return (
-    <div className="App">
-      <Home />
-    </div>
-  );
-}
+const App = () => {
+  let routes = useRoutes([
+    { path: "/", element: <Home /> },
+    { path: "/the-loai", element: <Home /> },
+    // ...
+  ]);
+  return routes;
+};
 
-export default App;
+const AppWrapper = () => {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+};
+
+export default AppWrapper;
+

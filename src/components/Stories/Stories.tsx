@@ -7,7 +7,7 @@ interface IProps {
 export  const Stories: React.FC<IProps>= (props) => {
 
     return (
-        <div className="flex flex-col mx-12 my-8">
+        <div className="z-0 flex flex-col mx-12 my-8">
           <h1 className="my-2 text-xl font-semibold text-black">{props.title}</h1>
           <div className="flex gap-4 mx-auto">
             {

@@ -1,5 +1,13 @@
-const greetings = ():void => {
-    console.log("Hello World");
+import { UserActionType } from "../action-types";
+
+interface SetAuthAction {
+    type: UserActionType.SET_AUTH,
+    payload: AuthPayload
 }
 
-export default greetings;
+interface UpdateUserAction{
+    type: UserActionType.UPDATE_USER,
+    payload: AuthPayload
+}
+
+export type UserAction = SetAuthAction | UpdateUserAction
