@@ -1,23 +1,25 @@
 import {UserActionType} from "../action-types/index";
-import { Dispatch } from "redux";
+import { AnyAction, Dispatch } from "redux";
 import { UserAction } from "../actions";
 import { apiUrl, LOCAL_STORAGE_TOKEN_NAME } from "../../data/constants";
 import setAuthToken from "../../utils/setAuthToken";
 import axios from "axios";
+import { ThunkAction } from "redux-thunk";
+import { IniState } from "..";
 
 
 
 
 
 //Authenticated user
-export const loadUser =  () => async (getState:void, dispatch:Dispatch<UserAction>) => {
+export const loadUser =  () => async (dispatch:Dispatch<UserAction>) => {
     try {
         if (localStorage[LOCAL_STORAGE_TOKEN_NAME]) {
             setAuthToken(localStorage[LOCAL_STORAGE_TOKEN_NAME]);
         }
         const response = await axios.get(`${apiUrl}/auth`);
         console.log(response.data.user);
-            dispatch({
+            await dispatch({
                 type: UserActionType.SET_AUTH, 
                 payload: {isAuthenticated: true, user: response.data.user as IUser} 
             })
@@ -25,9 +27,9 @@ export const loadUser =  () => async (getState:void, dispatch:Dispatch<UserActio
     } catch (error) {
         localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
         setAuthToken("");
-        dispatch({
+        await dispatch({
             type: UserActionType.SET_AUTH, 
-            payload: {isAuthenticated: true, user: null} 
+            payload: {isAuthenticated: false, user: null} 
         })
         
     }

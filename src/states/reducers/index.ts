@@ -2,10 +2,10 @@ import { combineReducers } from "redux";
 import userReducer from "../reducers/userReducer"
 
 
-const reducers = combineReducers({
+const rootReducers = combineReducers({
     user: userReducer
 })
 
-export default reducers;
+export default rootReducers;
 
-export type IniState = ReturnType<typeof reducers>
+export type IniState = ReturnType<typeof rootReducers>

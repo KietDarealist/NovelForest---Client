@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import AppWrapper from './App';
 import {Provider} from "react-redux"
-import store from "./states/store"
+import {store} from "./states/index";
 
 
 ReactDOM.render(
