@@ -1,29 +1,20 @@
-import React, {useEffect, useState} from "react"
+import React, { useState} from "react"
 import { Link } from "react-router-dom";
 import {SearchIcon, MenuIcon} from "@heroicons/react/outline"
-import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
-import { actionCreators, IniState } from "../../states";
+
+
 
 interface IProps{
 
 }
 
 const Header:React.FC<IProps> = (props):JSX.Element => {
-    const newUser:IUser =  {};
+
     const [open, setOpen] = useState(false);
-    const [verify, setVerify] = useState(false);
-    const dispatch = useDispatch();
-    const {registerUser, loadUser} = bindActionCreators(actionCreators, dispatch);
-    const auth = useSelector((state:IniState) => state.user);
+
 
     
-    const tempUser:IUser = {
-        name: "Tuan Kiet",
-        account: "20110508@student.hcmute.edu.vn",
-        password: "tuankiet@123",
-    }
-
+ 
 
     return (
         //background
@@ -60,11 +51,9 @@ const Header:React.FC<IProps> = (props):JSX.Element => {
                     className="xl:px-2 xl:py-0.5 md:px-1 md:py-0.1 font-semibold rounded-2xl bg-light-grey text-dark-green xl:text-md hover:text-white hover:bg-dark-green"
                    
                     >
-                           {`${auth.user ? auth.user.name as string : "No"}`}
+                           Đăng nhập
                     </button>
-                    <button className="xl:px-3 xl:py-0.5 md:px-1.5 md:py-0.1 font-semibold rounded-2xl bg-dark-green text-white xl:text-md hover:text-dark-green hover:bg-light-grey"
-                        onClick={() => {registerUser(tempUser); loadUser()}}
-                    >
+                    <button className="xl:px-3 xl:py-0.5 md:px-1.5 md:py-0.1 font-semibold rounded-2xl bg-dark-green text-white xl:text-md hover:text-dark-green hover:bg-light-grey">
                             Đăng ký
                     </button>
                 </div>
