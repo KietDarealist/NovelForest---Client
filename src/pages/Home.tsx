@@ -1,6 +1,7 @@
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import { Stories } from '../components/Stories/Stories'
+import SliderComponent from '../components/Slider/Slider';
 
 const Novels:INovel[] = [
     {
@@ -72,6 +73,7 @@ const Home:React.FC<IProps> = (props) => {
     return (
         <>
             <Header />
+            <SliderComponent />
             <Stories title="Truyện nổi bật trong tuần" data={Novels} />
             <Stories title="Truyện mới cập nhật" data={Novels} />
             <Stories title="Truyện nhiều lượt xem" data={Novels} />

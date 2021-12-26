@@ -1,4 +1,4 @@
-import React, { useState} from "react"
+import React, { useEffect, useState} from "react"
 import { Link } from "react-router-dom";
 import {SearchIcon, MenuIcon} from "@heroicons/react/outline"
 
@@ -11,10 +11,16 @@ interface IProps{
 const Header:React.FC<IProps> = (props):JSX.Element => {
 
     const [open, setOpen] = useState(false);
+    const [width, setWidth] = useState(1);
 
+    setInterval(()=> { 
+        setWidth(window.innerWidth)
+    },500)
+    useEffect(() => {
+       if (width>700)
+            setOpen(false)
+    }, [width])
 
-    
- 
 
     return (
         //background
@@ -47,15 +53,22 @@ const Header:React.FC<IProps> = (props):JSX.Element => {
                         <input placeholder="Tìm kiếm" className="w-full outline-none"/>
                         <SearchIcon className="cursor-pointer xl:h-2 xl:flex lg:flex lg:h-2"/>
                     </div>
-                    <button 
-                    className="xl:px-2 xl:py-0.5 md:px-1 md:py-0.1 font-semibold rounded-2xl bg-light-grey text-dark-green xl:text-md hover:text-white hover:bg-dark-green"
+                    <Link to="/login" 
                    
                     >
+                        <button 
+                    className="xl:px-2 xl:py-0.5 md:px-1 md:py-0.1 font-semibold rounded-2xl bg-light-grey text-dark-green xl:text-md hover:text-white hover:bg-dark-green"
+                        
+                        >
                            Đăng nhập
-                    </button>
-                    <button className="xl:px-3 xl:py-0.5 md:px-1.5 md:py-0.1 font-semibold rounded-2xl bg-dark-green text-white xl:text-md hover:text-dark-green hover:bg-light-grey">
+
+                        </button>
+                    </Link>
+                    <Link to="/register" >
+                            <button className="xl:px-3 xl:py-0.5 md:px-1.5 md:py-0.1 font-semibold rounded-2xl bg-dark-green text-white xl:text-md hover:text-dark-green hover:bg-light-grey">
                             Đăng ký
-                    </button>
+                            </button>
+                    </Link>
                 </div>
                 {/*right-mobile-container*/}
                 <div className="flex items-center justify-between w-2/3 md:hidden">
@@ -68,7 +81,7 @@ const Header:React.FC<IProps> = (props):JSX.Element => {
             </nav>
 
             {/*ham-menu*/}
-            <div className={` w-1/2 right-0 h-screen z-20 absolute bg-dark-green ${open ? "block" :  "hidden" }`}>
+            <div className={` w-full right-0 h-screen z-20 absolute bg-dark-green ${open ? "block" :  "hidden" }`}>
             <Link to="/" onClick={()=>{setOpen(!open);}}><h3 className="my-0.5 text-sm font-semibold text-center text-white cursor-pointer">Trang chủ</h3></Link>
                <Link to="/the-loai"><h3 className="my-0.5 text-sm font-semibold text-center text-white cursor-pointer">Thể loại</h3></Link>
                <Link to="/sang-tac"><h3 className="my-0.5 text-sm font-semibold text-center text-white cursor-pointer">Sáng tác</h3></Link>

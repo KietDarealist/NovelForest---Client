@@ -20,3 +20,5 @@ interface INovel{
     comments?: IComment[],
     rate?: Number
 }
+
+type IToggleDot = (a: function) => void;

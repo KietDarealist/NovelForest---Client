@@ -7,6 +7,8 @@ import {
   useRoutes,
 } from "react-router-dom";
 import Home from"./pages/Home";
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 
 interface IProps {
 
@@ -16,6 +18,8 @@ const App = () => {
   let routes = useRoutes([
     { path: "/", element: <Home /> },
     { path: "/the-loai", element: <Home /> },
+    { path: "/login", element : <Login />},
+    { path: "/register", element: <Register/>}
     // ...
   ]);
   return routes;
