@@ -1,14 +1,19 @@
 import axios from 'axios'
-import { createRef, useRef, useState } from 'react'
+import { createRef, useContext, useRef, useState } from 'react'
 import { Link , useNavigate } from 'react-router-dom'
 import './style.css'
 
+import { apiUrl } from '../contants/constant'
+import { AuthContext } from '../../contexts/AuthContext'
 
 export default function Login() {
     const [email,setEmail] = useState('')
     const [pass, setPass ] = useState('')
     const navigate = useNavigate()
     const [err,setErr] = useState(false)
+    //load contexts
+    const {authInfo,login} = useContext(AuthContext)
+    const {user} = authInfo
 
     const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => { 
         setEmail(event.target.value)
@@ -20,13 +25,10 @@ export default function Login() {
         e.preventDefault()
         setErr(false)
         try{
-            const res = await axios.post('http://localhost:8000/api/auth/login',{
-              account : email,
-              password : pass
-            })
-            console.log(res.data.success)
-            if (res.data.success)
-              navigate('/')
+            login(email,pass)
+            if (user)
+            navigate("/")
+
         }
         catch(err){
           console.log(err)

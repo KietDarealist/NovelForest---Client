@@ -1,49 +1,41 @@
-export enum Types {
-    Login_success = 'LOGIN_SUCCESS',
-    Login_failure = 'LOGIN_FAILURE',
-    Log_out = 'LOG_OUT',
-  }
+import { AuthActionType } from './types'
 
+export type AuthAction = { type: AuthActionType; payload: string | null }
 
-type authPayload = {
-    [Types.Login_success] : { 
-        user : IUserState
-    }
-    [Types.Login_failure] : { 
-        user : null
-    }
-    [Types.Log_out] : {
-        user : null
-    }
+export interface AuthState {
+	user : string | null,
+    authLoading : boolean,
+    error : boolean
 }
 
-export type authAction = ActionMap<authPayload>[keyof ActionMap<authPayload>]
+const {LOGIN_SUCCESS, 
+LOGIN_FAILURE,
+LOG_OUT } = AuthActionType
 
-
-export const authReducer = (state : IUserState,action :authAction ) => {
-    switch(action.type){
-        case Types.Login_success : 
-            return { 
-                user : action.payload,
+export const authReducer = (state: AuthState, action: AuthAction) => {
+    
+	switch (action.type) {
+		case LOGIN_SUCCESS:
+			return {
+				...state,
+				user: action.payload,
                 authLoading: false,
                 error : false
             }
-        case Types.Login_failure : 
+        case LOGIN_FAILURE : 
             return { 
                 user : null,
                 authLoading : false,
                 error : true
             }
-        case Types.Log_out : 
+        case LOG_OUT  : 
             return {
                 user : null,
                 authLoading : false,
                 error : true
             }
-        default :
-            return state
-    }
+		default:
+			return state
+	}
 }
 
-
-// https://elisealcala.com/context-use-reducer-typescript/

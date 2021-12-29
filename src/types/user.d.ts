@@ -1,6 +1,6 @@
 interface IUser{
-    name?: string,
-    account?: string,
+    name?: string ,
+    account?: string ,
     password?: string,
     avatar?:string,
     verify?: boolean
@@ -14,7 +14,7 @@ interface AuthPayload {
 
 
 interface IUserState{
-    user?: IUser | null | undefined,
+    user?: IUser,
     authLoading?: boolean,
     isAuthenticated?: boolean,
     error?: boolean
@@ -34,3 +34,8 @@ type ActionMap<M extends { [index: string]: any }> = {
           payload: M[Key];
         }
   };
+
+interface IUserForm { 
+    account : string,
+    password : string
+}
