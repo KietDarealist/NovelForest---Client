@@ -1,5 +1,4 @@
-import { SetStateAction, useState } from 'react'
-import SliderIMG from '../../assets/images/banner2.png'
+import { useState } from 'react'
 import './slider.css'
 import dataSlider from './dataSlider'
 export default function Slider() {

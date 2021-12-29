@@ -21,4 +21,3 @@ interface INovel{
     rate?: Number
 }
 
-type IToggleDot = (a: function) => void;

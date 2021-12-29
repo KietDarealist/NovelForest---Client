@@ -14,11 +14,23 @@ interface AuthPayload {
 
 
 interface IUserState{
+    user?: IUser | null | undefined,
     authLoading?: boolean,
     isAuthenticated?: boolean,
-    user?: IUser
+    error?: boolean
 }
 
 interface ILoginResponse {
     message: string
 }
+
+type ActionMap<M extends { [index: string]: any }> = {
+    [Key in keyof M]: M[Key] extends undefined
+      ? {
+          type: Key;
+        }
+      : {
+          type: Key;
+          payload: M[Key];
+        }
+  };
